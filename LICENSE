@@ -1,6 +1,19 @@
 MIT License
 
-Copyright (c) 2026 BinhDTVN
+Copyright (c) 2026 Galahad
+
+This license covers ONLY the files authored within this kit, namely:
+  - CLAUDE.md
+  - .claude/hooks/memory_first.py
+  - .claude/commands/wrap.md
+  - .claude/LESSONS.md
+  - README.md, CREDITS.md
+  - docs/**, templates/**, install.sh
+
+It does NOT cover the external tools this kit references and configures
+(claude-mem by thedotmack; codebase-memory by DeusData). Those projects are
+NOT distributed with this kit and remain under their own licenses — see
+CREDITS.md for links.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

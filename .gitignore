@@ -1,0 +1,23 @@
+# Ignore everything by default — this folder holds venv/data/nested repos.
+/*
+
+# Whitelist the kit's tracked files (dotfiles-style repo).
+!/.gitignore
+!/CLAUDE.md
+!/README.md
+!/CREDITS.md
+!/LICENSE
+!/install.sh
+!/docs
+!/templates
+!/.claude
+
+# Inside .claude, re-ignore everything, then whitelist the portable parts.
+/.claude/*
+!/.claude/hooks
+!/.claude/commands
+!/.claude/LESSONS.md
+
+# Never track local/secret/machine-specific files:
+#   settings.local.json -> contains Telegram token + machine permissions
+#   scheduled_tasks.lock -> runtime lock
