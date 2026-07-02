@@ -42,6 +42,7 @@ The behavioral rules in `CLAUDE.md` are not invented from scratch — they disti
 |-------|--------|------|
 | Rules 1–4 (Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven) | Derived from **Andrej Karpathy**'s observations, via forrestchang's skill pack | https://github.com/forrestchang/andrej-karpathy-skills |
 | Rules 5–12 (orchestration / token-budget / fail-loud rules) | **@Mnilax** — extended for orchestration, May 2026 | (community, credited inline in `CLAUDE.md`) |
+| Rule 2 additions: lazy evaluation ladder + safety floor (Jul 2026) | **DietrichGebert's ponytail** — minimalist code-gen skill, MIT. We adopted the 7-rung ladder and the "never cut validation/security" floor as rule text only; no ponytail code is bundled | https://github.com/DietrichGebert/ponytail |
 
 These attributions are also kept inline at the bottom of `CLAUDE.md` so they travel with the file.
 

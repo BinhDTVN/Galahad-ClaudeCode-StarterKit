@@ -46,6 +46,17 @@ Before implementing:
 - No error handling for impossible scenarios.
 - If you write 200 lines and it could be 50, rewrite it.
 
+**The lazy evaluation ladder** — before writing new code, stop at the first rung that fits:
+1. Doesn't need to exist? → skip it (YAGNI)
+2. Already in this codebase? → reuse it
+3. Stdlib does it? → stdlib
+4. Native platform feature? → use it
+5. Already-installed dependency covers it? → use that
+6. One line enough? → one line
+7. Only then: minimum viable implementation
+
+**The floor:** never simplify away input validation, error handling, security, or accessibility. Code is small because it's *unnecessary*, not because it's compressed.
+
 Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
 
 ## 3. Surgical Changes
@@ -164,3 +175,4 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 Sources:
 - Rules 1–4: https://github.com/forrestchang/andrej-karpathy-skills (derived from Andrej Karpathy's observations)
 - Rules 5–12: @Mnilax — Extended for orchestration, May 2026
+- Rule 2 ladder + floor: https://github.com/DietrichGebert/ponytail (MIT) — measured on real tickets: −54% LOC, −22% tokens, −20% cost vs baseline, safety maintained. Added Jul 2026.
