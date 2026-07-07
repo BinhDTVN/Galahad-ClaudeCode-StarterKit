@@ -77,6 +77,24 @@ On a recall request, the agent queries memory **before** Glob/Grep, in this orde
 The `memory_first.py` hook is a *nudge* that fires on recall phrasing (Vietnamese + English).
 Rule 0 is the *contract*. The hook makes the contract hard to forget.
 
+### Two-tier nudge — cheap lookup before the deep dig
+
+The same answer-ladder principle CaelionAI uses for document Q&A (a cheap lookup
+before a deep LLM call) applies to Claude Code's own memory: **not every "recall"
+prompt deserves the full 6–8-round memory dig.** The hook classifies the prompt
+(deterministic — `classify()` in code, not the model) into one of two lanes:
+
+| Lane | Triggers on | Nudge |
+|------|-------------|-------|
+| **PLANNING** (light) | "what next / plan / continue / resume / tiếp theo / tiếp tục / bước kế" | Read `LESSONS.md` + the status docs (`BUILD_STATUS.md` / `IMPLEMENTATION_NOTES.md`), **1–2 tool calls**; escalate only if those don't answer. |
+| **RECALL** (full) | genuine past-work recall — "đã…chưa / how did we / where is / last time" | Full ladder: `LESSONS.md` → claude-mem → codebase-memory → filesystem. |
+
+PLANNING wins when both signals appear (a continuation is planning, not a dig).
+This exists because a one-line *"what's next?"* used to fire the full ladder —
+cache-cold base context + adaptive deep-thinking + 6–8 memory rounds ≈ **~10% of a
+turn's limit for a one-line question.** The light lane points straight at the
+cheap curated sources instead. Verify with `.claude/hooks/test_memory_first.py`.
+
 ---
 
 ## Escalation: where lessons graduate to
