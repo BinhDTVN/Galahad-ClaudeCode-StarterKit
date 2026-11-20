@@ -4,6 +4,9 @@ Bài học đã cô đọng từ các task trước. `/wrap` append vào đây; 
 
 Format mỗi dòng: `- [YYYY-MM-DD][tag][tag] <1 rule mệnh lệnh, kiểm chứng được>`
 
+Trạng thái (tuỳ chọn, gắn bằng `/lessons-status`, không xoá dòng): `[status:open|closed|promoted|expired]`,
+`promoted` kèm `[enforced:<CLAUDE.md|hook:file|skill:tên>]`, lesson mới thay lesson cũ thì gắn `[supersedes:<ngày-tag-tag>]` trên dòng MỚI.
+
 > Vì claude-mem chạy worker mode (không có manual write tool), đây là store ghi-được duy nhất sống qua `/clear`. Auto-capture của worker bổ sung qua `search`/`get_observations`, nhưng file này là nguồn lessons có chủ đích.
 
 ## LESSONS
