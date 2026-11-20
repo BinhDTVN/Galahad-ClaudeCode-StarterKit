@@ -50,7 +50,8 @@ One line per lesson, imperative, **checkable**:
   corrupts non-ASCII."*
 - Bad: *"Be careful with encoding."* (not checkable, not actionable — drop it.)
 
-Tags let Rule 0 grep precisely. Append only; never rewrite old lines.
+Tags let Rule 0 grep precisely. Append only; never rewrite a lesson's text. The one change
+allowed on an old line is its status tag, through `/lessons-status`.
 
 ### `docs/IMPLEMENTATION_NOTES.md`
 One entry per decision: what you chose, what you rejected, and **why**. The reader is a future

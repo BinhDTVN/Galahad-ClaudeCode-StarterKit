@@ -40,8 +40,9 @@ fi
 # 2. .claude/ — commands + hooks always refreshed; LESSONS.md preserved if present.
 mkdir -p "$TARGET/.claude/commands" "$TARGET/.claude/hooks"
 cp "$KIT_DIR/.claude/commands/wrap.md"      "$TARGET/.claude/commands/wrap.md"
+cp "$KIT_DIR/.claude/commands/lessons-status.md" "$TARGET/.claude/commands/lessons-status.md"
 cp "$KIT_DIR/.claude/hooks/memory_first.py" "$TARGET/.claude/hooks/memory_first.py"
-echo "• Installed /wrap command and memory_first.py hook"
+echo "• Installed /wrap and /lessons-status commands and memory_first.py hook"
 
 if [ -e "$TARGET/.claude/LESSONS.md" ]; then
   echo "• .claude/LESSONS.md already exists — preserved (your lessons are safe)."

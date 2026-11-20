@@ -127,9 +127,11 @@ it honest:
 | **Condense vs append** | One line per lesson, merged with related lines when the file grows | An ever-growing list of near-duplicates nobody re-reads |
 | **When to read** | An index line that says *when* the entry matters ("read before touching hooks on Windows") | An index line that only names the topic |
 
-Run a cleanup pass when `LESSONS.md` or any index file starts to feel long: merge duplicates,
-delete what expired, and move status out to `BUILD_STATUS.md`. Delete only with the owner's
-approval; a lesson that looks stale may still be guarding against a real failure.
+Run a cleanup pass when `LESSONS.md` starts to feel long: **`/lessons-status`** marks each
+lesson `open`, `closed`, `promoted` (now enforced by `CLAUDE.md`, a hook or a skill),
+`expired`, or `supersedes:` an older one. It changes tags only, after the owner approves, and
+never deletes a line or edits its text. A lesson that looks stale may still be guarding against
+a real failure, and the old wording is the record of why you once thought otherwise.
 
 ## Procedures graduate to skills
 
