@@ -79,8 +79,8 @@ Rule 0 is the *contract*. The hook makes the contract hard to forget.
 
 ### Two-tier nudge — cheap lookup before the deep dig
 
-The same answer-ladder principle CaelionAI uses for document Q&A (a cheap lookup
-before a deep LLM call) applies to Claude Code's own memory: **not every "recall"
+The answer-ladder principle from document Q&A systems (a cheap lookup before a
+deep LLM call) applies to Claude Code's own memory: **not every "recall"
 prompt deserves the full 6–8-round memory dig.** The hook classifies the prompt
 (deterministic — `classify()` in code, not the model) into one of two lanes:
 
@@ -110,3 +110,31 @@ cheap curated sources instead. Verify with `.claude/hooks/test_memory_first.py`.
 
 Default everything to Tier 1. Promote to Tier 2 only when a lesson has recurred or is clearly
 universal — don't bloat `CLAUDE.md` with one-off notes.
+
+---
+
+## What is worth saving (and what isn't)
+
+A memory store fails in two ways: the agent never reads it, or it reads it and gets misled. The
+second one creeps in slowly, as the store fills with notes that were true once. These filters keep
+it honest:
+
+| Filter | Keep | Leave out |
+|--------|------|-----------|
+| **Durable vs expiring** | Root causes, decisions, conventions, gotchas | Branch names, ports, today's progress, "file X is the latest version". Those go in `BUILD_STATUS.md` |
+| **Context vs agenda** | An open question, saved as context | Treating that open item as a to-do in later sessions. It may have been settled since; raise it only when the owner brings up that subject |
+| **Who said it** | Owner decisions, marked as such | The agent's own conclusions recorded as if the owner had stated them. Tag the difference (for example `[owner]` vs `[inferred]`) |
+| **Condense vs append** | One line per lesson, merged with related lines when the file grows | An ever-growing list of near-duplicates nobody re-reads |
+| **When to read** | An index line that says *when* the entry matters ("read before touching hooks on Windows") | An index line that only names the topic |
+
+Run a cleanup pass when `LESSONS.md` or any index file starts to feel long: merge duplicates,
+delete what expired, and move status out to `BUILD_STATUS.md`. Delete only with the owner's
+approval; a lesson that looks stale may still be guarding against a real failure.
+
+## Procedures graduate to skills
+
+Everything in `CLAUDE.md` and every memory index is loaded into every session. A skill
+(`.claude/skills/<name>/SKILL.md`) loads only its one-line description until it is used. So when
+the same multi-step procedure has come up twice (a release checklist, a report format, a QA
+routine), it belongs in a skill, not in another paragraph of notes. `/wrap` proposes the skill;
+the owner approves it before it is written.

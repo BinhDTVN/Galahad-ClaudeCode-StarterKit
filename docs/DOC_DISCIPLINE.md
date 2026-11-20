@@ -26,6 +26,9 @@ what makes them rot. The rule is simple: **each doc answers one question, at one
         ├─ It's the STATE of the task (done / TODO next / test results)
         │        → docs/BUILD_STATUS.md
         │
+        ├─ It's a multi-step PROCEDURE that has come up twice
+        │        → .claude/skills/<name>/SKILL.md   (proposed by /wrap, you approve)
+        │
         └─ It's a one-off LESSON (a root cause, a correction, a gotcha)
                  → .claude/LESSONS.md      ← default lands here
 ```

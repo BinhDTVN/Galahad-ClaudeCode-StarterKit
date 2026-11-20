@@ -31,7 +31,7 @@ echo
 # 1. CLAUDE.md — copy, warn (do not clobber) if one already exists.
 if [ -e "$TARGET/CLAUDE.md" ]; then
   echo "• CLAUDE.md already exists in target — leaving it untouched."
-  echo "  Review $KIT_DIR/CLAUDE.md and merge by hand if you want the 12 rules."
+  echo "  Review $KIT_DIR/CLAUDE.md and merge by hand if you want the 15 rules."
 else
   cp "$KIT_DIR/CLAUDE.md" "$TARGET/CLAUDE.md"
   echo "• Copied CLAUDE.md"

@@ -10,12 +10,13 @@ from where**, so nothing here is mistaken for ours that isn't.
 
 Written for this kit (by Galahad), MIT-licensed:
 
-- `CLAUDE.md` — the 12-rule contract structure + Rule 0 Memory-First (the *wording and ordering*;
-  the source ideas behind the rules are credited below).
+- `CLAUDE.md` — the 15-rule contract structure + Rule 0 Memory-First (the *wording and ordering*;
+  the source ideas behind the rules are credited below), and Rules 13–15 in full.
 - `.claude/hooks/memory_first.py` — the recall-detection hook.
 - `.claude/commands/wrap.md` — the `/wrap` command.
 - `.claude/LESSONS.md` — the Tier-1 store format.
-- `docs/`, `templates/`, `install.sh`, `README.md`.
+- `docs/` (including `WORKING_PATTERNS.md` and `HOOKS.md`), `templates/` (including
+  `session_start_example.py`), `install.sh`, `README.md`.
 
 ---
 
@@ -43,6 +44,7 @@ The behavioral rules in `CLAUDE.md` are not invented from scratch — they disti
 | Rules 1–4 (Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven) | Derived from **Andrej Karpathy**'s observations, via forrestchang's skill pack | https://github.com/forrestchang/andrej-karpathy-skills |
 | Rules 5–12 (orchestration / token-budget / fail-loud rules) | **@Mnilax** — extended for orchestration, May 2026 | (community, credited inline in `CLAUDE.md`) |
 | Rule 2 additions: lazy evaluation ladder + safety floor (Jul 2026) | **DietrichGebert's ponytail** — minimalist code-gen skill, MIT. We adopted the 7-rung ladder and the "never cut validation/security" floor as rule text only; no ponytail code is bundled | https://github.com/DietrichGebert/ponytail |
+| Rules 13–15, Rule 12 "check the output itself", `docs/WORKING_PATTERNS.md`, `docs/HOOKS.md` (Nov 2026) | **This kit**, from running Claude Code agents on real project work: multi-agent setups and unattended overnight runs | (this repo) |
 
 These attributions are also kept inline at the bottom of `CLAUDE.md` so they travel with the file.
 
