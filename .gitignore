@@ -19,5 +19,9 @@
 !/.claude/LESSONS.md
 
 # Never track local/secret/machine-specific files:
-#   settings.local.json -> contains Telegram token + machine permissions
+#   settings.local.json -> may contain tokens + machine permissions
 #   scheduled_tasks.lock -> runtime lock
+
+# Python bytecode from running the hook tests
+__pycache__/
+*.pyc

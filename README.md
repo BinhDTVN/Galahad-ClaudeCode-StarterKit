@@ -1,6 +1,6 @@
 # Galahad Claude Code Kit
 
-**A drop-in discipline layer for Claude Code: a 12-rule behavioral contract + a memory-first
+**A drop-in discipline layer for Claude Code: a 15-rule behavioral contract + a memory-first
 workflow that closes the loop between what you save and what the agent reads back.**
 
 The problem this solves: every `/clear` wipes the agent's working memory, so it re-greps the
@@ -40,9 +40,10 @@ you probably don't need this. That's fine — it's a starter kit, not a framewor
 
 | Piece | What it does | Authored by |
 |-------|--------------|-------------|
-| `CLAUDE.md` | 12-rule behavioral contract + **Rule 0 Memory-First** | **This kit** (Galahad). Rules 1–4 derived from Karpathy, 5–12 from @Mnilax — see CREDITS |
+| `CLAUDE.md` | 15-rule behavioral contract + **Rule 0 Memory-First** | **This kit** (Galahad). Rules 1–4 derived from Karpathy, 5–12 from @Mnilax, 13–15 from this kit's field use — see CREDITS |
 | `.claude/hooks/memory_first.py` | `UserPromptSubmit` hook: detects "recall" phrasing (VN+EN), nudges the agent to query memory before grepping | **This kit** (Galahad) |
-| `.claude/commands/wrap.md` | `/wrap` — end-of-task: distill lessons → route into the 3-tier store | **This kit** (Galahad) |
+| `.claude/commands/wrap.md` | `/wrap` — end-of-task: distill lessons → route into the 3-tier store; propose a skill for repeated procedures | **This kit** (Galahad) |
+| `templates/session_start_example.py` | Optional `SessionStart` hook: skips `resume`, reruns slow work only when inputs change, injects your TODO list | **This kit** (Galahad) |
 | `.claude/LESSONS.md` | Tier-1 lesson store: writable, survives `/clear`, read first on recall | **This kit** (Galahad) |
 | `docs/`, `templates/`, `install.sh` | Setup, memory model, doc-discipline, copy-paste starters | **This kit** (Galahad) |
 | **claude-mem** *(optional, external)* | Auto-captures sessions, compresses them, injects context back | **thedotmack** — [github.com/thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) |
@@ -80,7 +81,7 @@ and Tier-3 memory — install them only if you want the full stack.
 
 ```
 SESSION START
-   └─ CLAUDE.md (12 rules + Rule 0) loads as project instructions
+   └─ CLAUDE.md (15 rules + Rule 0) loads as project instructions
    └─ (if installed) claude-mem injects relevant context from past sessions
 
 YOU ASK SOMETHING
@@ -142,8 +143,27 @@ Full walkthrough + per-piece verification: **[docs/SETUP.md](docs/SETUP.md)**.
 |-----|--------------|
 | [docs/SETUP.md](docs/SETUP.md) | Installing — step by step, including the two external tools |
 | [docs/MEMORY_ARCHITECTURE.md](docs/MEMORY_ARCHITECTURE.md) | You want to understand the 3-tier model and the read/write loop |
-| [docs/DOC_DISCIPLINE.md](docs/DOC_DISCIPLINE.md) | You want the rule for which living doc to write into (CLAUDE.md / IMPLEMENTATION_NOTES / BUILD_STATUS / LESSONS) |
+| [docs/DOC_DISCIPLINE.md](docs/DOC_DISCIPLINE.md) | You want the rule for which living doc to write into (CLAUDE.md / IMPLEMENTATION_NOTES / BUILD_STATUS / LESSONS / skills) |
+| [docs/WORKING_PATTERNS.md](docs/WORKING_PATTERNS.md) | You want the reasoning behind the rules: when to ask vs start, checking output, subagents, unattended runs |
+| [docs/HOOKS.md](docs/HOOKS.md) | You are adding or debugging a hook, or sessions feel slow to start |
 | [CREDITS.md](CREDITS.md) | Always — who made what, and what this kit does *not* claim |
+
+---
+
+## What's new in v0.2 (Nov 2026)
+
+- **Rules 13–15** in `CLAUDE.md`: authority comes from the source, not the wording; one stop rule
+  for unattended runs; material before template, draft before polish. Rule 12 now asks you to
+  check the output itself (open it, run it), not your memory of writing it.
+- **Memory hygiene:** `docs/MEMORY_ARCHITECTURE.md` gains "What is worth saving" (durable vs
+  expiring, context vs agenda, who said it, condense vs append) and "Procedures graduate to
+  skills".
+- **`/wrap`** filters out expiring status, tags agent-inferred lessons, and proposes a skill when
+  a multi-step procedure has repeated. It no longer assumes a specific person approves; it asks
+  whoever is using it.
+- **Hooks:** new `docs/HOOKS.md` and an optional `templates/session_start_example.py`.
+- **`memory_first.py`** recognises Vietnamese typed without diacritics (multi-word phrases only,
+  to avoid homograph false positives); tests cover it.
 
 ---
 

@@ -5,8 +5,8 @@
   recall   -> full ladder (LESSONS -> claude-mem -> codebase-memory -> fs)
   None     -> no reminder (normal prompt untouched)
 
-Prompts are real diacritic Vietnamese (how Galahad types) + English. Prints are
-ASCII-only (lesson 66: diacritic print crashes cp1258 -> FALSE fail).
+Prompts are real Vietnamese, with and without diacritics, + English. Prints are
+ASCII-only (a diacritic print can crash a cp1258 console -> FALSE fail).
 
 Run:  PYTHONUTF8=1 python .claude/hooks/test_memory_first.py
 """
@@ -18,8 +18,11 @@ from memory_first import classify  # noqa: E402
 
 # (id, prompt, expected) — id is ASCII-safe for printing; prompt is data.
 CASES = [
-    # planning / what-next / continuation -> LIGHT (incl. lesson 116's own case)
+    # planning / what-next / continuation -> LIGHT (incl. the original 1-line case)
     ("vn-tiep-theo-plan", "Tiếp theo plan của chúng ta là gì bro?", "planning"),
+    ("vn-nodiac-tiep-theo", "tiep theo lam gi bro", "planning"),
+    ("vn-nodiac-tiep-tuc", "tiep tuc task hom qua", "planning"),
+    ("vn-nodiac-con-gi", "con gi nua khong", "planning"),
     ("vn-tiep-tuc", "tiếp tục vấn đề webapp", "planning"),
     ("vn-lam-gi-tiep", "làm gì tiếp theo", "planning"),
     ("vn-buoc-ke", "bước kế tiếp là gì", "planning"),
@@ -39,6 +42,8 @@ CASES = [
     ("vn-viet-ham", "viết cho tôi một hàm sort mảng", None),
     ("vn-fix-bug", "fix cái bug ở dòng 42", None),
     ("en-add-button", "add a button to the login page", None),
+    # single folded words must NOT fire (homographs: 'dau' = đâu/đau/dầu)
+    ("vn-nodiac-homograph", "dau dau qua, sua giup cai loi nay", None),
     # precedence: PLANNING wins when both signals present
     ("mix-planning-wins", "tiếp theo, hồi đó mình đã làm gì", "planning"),
 ]

@@ -9,8 +9,8 @@ own memory: not every "recall" prompt deserves the full 6-8-round memory dig.
                            the CURRENT plan/status, not a deep history dig. Nudge
                            to read the cheap curated sources (LESSONS + status
                            docs) with 1-2 tool calls, and only escalate if those
-                           don't answer. (Fixes lesson 116: a 1-line "tiếp theo
-                           làm gì?" used to trigger the full ladder ~= 10% limit.)
+                           don't answer. (A 1-line "tiếp theo làm gì?" used to
+                           trigger the full ladder, about 10% of a turn's limit.)
 
   Tier RECALL (full)     — genuine past-work recall ("đã…chưa", "how did we",
                            "where is", "last time") warrants the full ladder:
@@ -45,6 +45,11 @@ PLANNING_PATTERNS = [
     r"làm tiếp|tiếp đi",
     r"quay lại (vụ|việc|vấn đề|chuyện|task)",
     r"còn (gì|bước|việc|task).{0,15}(nữa|phải|chưa|không)",
+    # --- Vietnamese without diacritics (people type both ways).
+    # Multi-word phrases ONLY: folding single words creates homographs
+    # ('đâu' -> 'dau' also reads 'đau'/'dầu', 'nằm' -> 'nam' = 'năm').
+    r"tiep theo|ke tiep|ke hoach|tiep tuc|lam tiep|tiep di",
+    r"buoc (tiep|ke|sau|nay|toi)|lam gi tiep|con gi nua",
     # --- English ---
     r"\bnext step\b|\bnext task\b",
     r"what(?:'s| is| should we do)?.{0,10}\bnext\b",
@@ -84,9 +89,9 @@ _RECALL_RE = re.compile("|".join(RECALL_PATTERNS), re.IGNORECASE | re.UNICODE)
 
 REMINDER_PLANNING = (
     "[Memory-First / Rule 0 — làn NHẸ] Prompt này hỏi KẾ HOẠCH / BƯỚC KẾ / nối "
-    "mạch việc. ĐỪNG Read cả LESSONS.md (~25k tokens, đụng trần Read). Tra bằng "
+    "mạch việc. ĐỪNG Read cả LESSONS.md (file có thể rất lớn). Tra bằng "
     "CODE trước (Rule 5 — code query miễn phí, LLM chỉ khi MISS):\n"
-    "1. Grep .claude/LESSONS.md theo keyword/tag câu hỏi (vd tag [webapp]/[seshat]) "
+    "1. Grep .claude/LESSONS.md theo keyword/tag câu hỏi (vd tag [hook]/[windows]) "
     "→ chỉ Read các dòng KHỚP, không đọc cả file.\n"
     "2. Grep/tail 'Next Steps' / TODO gần nhất trong BUILD_STATUS.md / "
     "IMPLEMENTATION_NOTES.md (không đọc cả file).\n"
@@ -98,7 +103,7 @@ REMINDER_RECALL = (
     "[Memory-First / Rule 0 — làn ĐẦY ĐỦ] Prompt này có dấu hiệu RECALL (hỏi về "
     "việc đã làm trước đó). TRƯỚC khi Glob/Grep filesystem, tra memory theo thứ tự:\n"
     "1. Grep .claude/LESSONS.md theo keyword/tag câu hỏi (code query, miễn phí) → "
-    "Read các dòng KHỚP; chỉ Read cả file khi cần bối cảnh rộng (~25k tokens).\n"
+    "Read các dòng KHỚP; chỉ Read cả file khi thật sự cần bối cảnh rộng.\n"
     "2. claude-mem (worker mode): ToolSearch \"select:mcp__plugin_claude-mem_mcp-search__search,"
     "mcp__plugin_claude-mem_mcp-search__get_observations\" rồi search() với keyword câu hỏi, "
     "get_observations([ID]) để bung chi tiết. (observation_search/observation_add KHÔNG chạy ở "
