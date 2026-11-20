@@ -3,7 +3,7 @@ description: Cập nhật TRẠNG THÁI các lesson trong .claude/LESSONS.md (op
 allowed-tools: Read, Edit, Grep, Glob
 ---
 
-# /lessons-status — dọn LESSONS.md bằng trạng thái, không bằng xoá
+# /lessons-status: dọn LESSONS.md bằng trạng thái, không bằng xoá
 
 Một danh sách lesson phẳng sẽ tới lúc tự hại mình: lesson đã xử lý xong đọc y hệt lesson còn
 sống, và agent cứ thế hành động lại theo một cảnh báo đã hết hiệu lực. Xoá thì mất dấu vết

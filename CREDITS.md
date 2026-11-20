@@ -14,7 +14,7 @@ Written for this kit (by Galahad), MIT-licensed:
   the source ideas behind the rules are credited below), and Rules 13–15 in full.
 - `.claude/hooks/memory_first.py` — the recall-detection hook.
 - `.claude/commands/wrap.md` — the `/wrap` command.
-- `.claude/commands/lessons-status.md` — the `/lessons-status` command.
+- `.claude/commands/lessons-status.md`: the `/lessons-status` command.
 - `.claude/LESSONS.md` — the Tier-1 store format.
 - `docs/` (including `WORKING_PATTERNS.md` and `HOOKS.md`), `templates/` (including
   `session_start_example.py`), `install.sh`, `README.md`.

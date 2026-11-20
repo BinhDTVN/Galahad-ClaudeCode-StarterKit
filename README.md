@@ -43,7 +43,7 @@ you probably don't need this. That's fine — it's a starter kit, not a framewor
 | `CLAUDE.md` | 15-rule behavioral contract + **Rule 0 Memory-First** | **This kit** (Galahad). Rules 1–4 derived from Karpathy, 5–12 from @Mnilax, 13–15 from this kit's field use — see CREDITS |
 | `.claude/hooks/memory_first.py` | `UserPromptSubmit` hook: detects "recall" phrasing (VN+EN), nudges the agent to query memory before grepping | **This kit** (Galahad) |
 | `.claude/commands/wrap.md` | `/wrap` — end-of-task: distill lessons → route into the 3-tier store; propose a skill for repeated procedures | **This kit** (Galahad) |
-| `.claude/commands/lessons-status.md` | `/lessons-status` — mark lessons open / closed / promoted / expired / superseded instead of deleting them; owner approves before any tag changes | **This kit** (Galahad) |
+| `.claude/commands/lessons-status.md` | `/lessons-status`: mark lessons open / closed / promoted / expired / superseded instead of deleting them; owner approves before any tag changes | **This kit** (Galahad) |
 | `templates/session_start_example.py` | Optional `SessionStart` hook: skips `resume`, reruns slow work only when inputs change, injects your TODO list | **This kit** (Galahad) |
 | `.claude/LESSONS.md` | Tier-1 lesson store: writable, survives `/clear`, read first on recall | **This kit** (Galahad) |
 | `docs/`, `templates/`, `install.sh` | Setup, memory model, doc-discipline, copy-paste starters | **This kit** (Galahad) |
